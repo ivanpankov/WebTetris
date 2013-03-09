@@ -1,0 +1,81 @@
+/*
+    Document   : styles
+    Created on : 2013-3-9, 17:38:08
+    Author     : ivanp_000
+    Description:
+    Purpose of the stylesheet follows.
+*/
+
+/*
+    TODO customize this sample style
+    Syntax recommendation http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html
+*/
+
+html, body, div {
+    margin: 0;
+    padding:0;
+}
+
+body{
+    background-color: white;
+    
+    #layout{
+        border: 1px solid red;
+        width: 800px;
+        overflow: hidden;
+        margin: 50px auto;
+        
+        #left-panel {
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+        }
+        
+        #play-field {
+            float: left;
+            width: 240px;
+            height: 480px;
+            border: 6px solid #3a140c;
+            background-color: #c69c6d;
+        }
+        
+        #right-panel {
+            float: left;
+            width: 168px;
+            height: 480px;
+            
+            #next-element-box {
+                height: 144px;
+            }
+        }
+        
+        .panel-box {
+            background-color: #c69c6d;
+            margin: 40px 20px;
+        }
+        
+        .info {
+            height: 48px;
+            
+            div {
+                font-size: 24px;
+                font-family: Consolas;
+                line-height: 48px;
+                letter-spacing: -3px;
+                overflow: hidden;
+                
+                &:first-of-type {
+                    float: left;
+                    padding-left: 6px;
+                }
+                
+                &:last-of-type {
+                    text-align: right;
+                    float: right;
+                    padding-right: 6px;
+                }
+            }
+        }
+    }
+}
