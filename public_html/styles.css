@@ -27,7 +27,6 @@ body #layout #left-panel {
   float: left;
   width: 100px;
   height: 100px;
-  border: 1px solid blue;
 }
 body #layout #play-field {
   float: left;
@@ -43,6 +42,7 @@ body #layout #right-panel {
 }
 body #layout #right-panel #next-element-box {
   height: 144px;
+  padding: 20px;
 }
 body #layout .panel-box {
   background-color: #c69c6d;
@@ -66,4 +66,11 @@ body #layout .info div:last-of-type {
   text-align: right;
   float: right;
   padding-right: 6px;
+}
+body .subshape {
+  width: 16px;
+  height: 16px;
+  border: 2px outset #02ac02;
+  outline: 2px solid #444;
+  background-color: green;
 }

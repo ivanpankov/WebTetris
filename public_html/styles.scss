@@ -29,7 +29,6 @@ body{
             float: left;
             width: 100px;
             height: 100px;
-            border: 1px solid blue;
         }
         
         #play-field {
@@ -77,5 +76,19 @@ body{
                 }
             }
         }
+    }
+    
+    .subshape
+    {
+        width:16px;
+        height:16px;
+        border: 2px outset rgb(2, 172, 2);
+        outline: 2px solid #444;
+        background-color: green;
+    }
+    
+    /* color schemes */
+    .vadim{
+        
     }
 }
