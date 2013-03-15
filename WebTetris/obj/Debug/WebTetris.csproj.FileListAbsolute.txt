@@ -1,0 +1,5 @@
+D:\src\WebTetris\WebTetris\bin\WebTetris.dll
+D:\src\WebTetris\WebTetris\bin\WebTetris.pdb
+D:\src\WebTetris\WebTetris\obj\Debug\WebTetris.csprojResolveAssemblyReference.cache
+D:\src\WebTetris\WebTetris\obj\Debug\WebTetris.dll
+D:\src\WebTetris\WebTetris\obj\Debug\WebTetris.pdb
