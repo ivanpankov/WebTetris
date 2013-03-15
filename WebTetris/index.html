@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Web Tetris</title>
+    <link href="styles.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="js/libs/jquery-1.9.0/jquery.min.js"></script>
+    <script src="js/libs/gameCanvasEngine.js"></script>
+</head>
+<body>
+    <div id="layout">
+        <div id="left-panel">
+        </div>
+        <div id="middle-panel">
+            <canvas id="play-field"></canvas>
+        </div>
+        <div id="right-panel">
+            <div id="next-element-box" class="panel-box">
+            </div>
+            <div id="level-box" class="panel-box info">
+                <div>LEVEL:</div>
+                <div>1</div>
+            </div>
+            <div id="score-box" class="panel-box info">
+                <div>SCORE:</div>
+                <div>12345</div>
+            </div>
+            <div id="lines-box" class="panel-box info">
+                <div>LINES:</div>
+                <div>12</div>
+            </div>
+        </div>
+    </div>
+    <script src="js/tetris.js"></script>
+</body>
+</html>
