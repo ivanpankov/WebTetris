@@ -10,7 +10,7 @@
     (function () {
         var shapes = {
                 I: [[0, 0, 0, 30720], [8192, 8192, 8192, 8192]],
-                O: [[24576, 24576]],
+                O: [[0, 24576, 24576]],
                 S: [[0, 12288, 24576], [16384, 24576, 8192]],
                 Z: [[0, 24576, 12288], [8192, 24576, 16384]],
                 J: [[0, 16384, 28672], [24576, 16384, 16384], [0, 28672, 4096], [8192, 8192, 24576]],
@@ -98,7 +98,7 @@
         };
     
         Shape = function (kind) {
-            var x = 2,
+            var x = 3,
                 y = 0;
             
             this.orientation = 0;
@@ -194,7 +194,7 @@
 
     // Graphics
     (function () {
-        var canvas, colorScheme, ctx,
+        var colorScheme, ctx, ctxNext,
             
             CANVAS_SQUARE_WIDTH = 22,
             CANVAS_SQUARE_HEIHGT = 22,
@@ -307,18 +307,31 @@
             draw: function () {
                 var i;
                 
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
                 
                 for (i = 0; i < engine.objects.length; i += 1) {
                     drawShape(engine.objects[i]);
                 }
             },
             
-            setCanvas: function (selector) {
-                canvas = document.getElementById(selector);
+            drawNextShape: function () {
+                var ctxBack = ctx;
+                ctx = ctxNext;
+                ctxNext.clearRect(0, 0, 128, 128);
+                drawShape(engine.nextShape);
+                ctx = ctxBack;
+            },
+            
+            setCanvas: function (fieldId, nextShapeId) {
+                var canvas = document.getElementById(fieldId),
+                    canvasNext = document.getElementById(nextShapeId);
                 canvas.width = CANVAS_WIDTH;
                 canvas.height = CANVAS_HEIGHT;
+                
+                canvasNext.width = 128;
+                canvasNext.height = 128;
                 ctx = canvas.getContext('2d');
+                ctxNext = canvasNext.getContext('2d');
             }
         };
     }());
@@ -371,6 +384,14 @@
                     };
             }()),
                 
+            stopMoving = function () {
+                engine.nextShape.setX(5);
+                engine.addObject(engine.nextShape);
+                
+                engine.nextShape = getRandomShape();
+                render.drawNextShape();
+            },
+                
             getRandomShape = function () {
                 // get random number 1 - 7
                 var shp,
@@ -413,23 +434,23 @@
             },
                 
             rotate = function () {
-                engine.drivable.rotate();
+                engine.drivableShape.rotate();
             },
                 
             moveRight = function () {
-                engine.drivable.moveRight();
+                engine.drivableShape.moveRight();
             },
                 
             moveLeft = function () {
-                engine.drivable.moveLeft();
+                engine.drivableShape.moveLeft();
             },
                 
             moveDown = function () {
-                var y = engine.drivable.getY();
-                engine.drivable.moveDown();
+                var y = engine.drivableShape.getY();
+                engine.drivableShape.moveDown();
                 
-                if (engine.drivable.getY() === y) {
-                    engine.addObject(getRandomShape());
+                if (engine.drivableShape.getY() === y) {
+                    stopMoving();
                 }
             },
         
@@ -474,15 +495,19 @@
         
         engine = {
             objects: [],
-            drivable: null,
             
             addObject: function (obj) {
                 this.objects.push(obj);
-                this.drivable = obj;
+                this.drivableShape = obj;
                 field.addShape(obj);
             },
             
             start: function () {    // start animation
+                engine.nextShape = getRandomShape();
+                var shape = getRandomShape();
+                render.drawNextShape();
+                shape.setX(5);
+                engine.addObject(shape);
                 animate(new Date().getTime());
             }
         };
@@ -499,19 +524,10 @@
     
     // tests
     (function () {
-        render.setCanvas('play-field');
+        render.setCanvas('play-field', 'next-shape');
         render.setColors('scheme1');
-        
-        var shapeJ = new Shape('J'),
-            shapeS = new Shape('S');
-        
-        shapeS.setX(4);
-        shapeS.setY(6);
-        //engine.addObject(shapeS);
-        engine.addObject(shapeJ);
+
         engine.start();
-        
-        
     }());
 
 }());
