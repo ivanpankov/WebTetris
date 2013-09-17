@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tetris</title>
+        <meta charset="utf-8">
+        <link href="styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="layout">
+            <div id="left-panel">
+            </div>
+            <div id="middle-panel">
+                <canvas id="play-field"></canvas>
+            </div>
+            <div id="right-panel">
+                <div id="next-element-box" class="panel-box">
+                    <canvas id='next-shape'></canvas>
+                </div>
+                <div id="level-box" class="panel-box info">
+                    <div>LEVEL:</div>
+                    <div>1</div>
+                </div>
+                <div id="score-box" class="panel-box info">
+                    <div>SCORE:</div>
+                    <div>12345</div>
+                </div>
+                <div id="lines-box" class="panel-box info">
+                    <div>LINES:</div>
+                    <div>12</div>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
