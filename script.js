@@ -384,12 +384,31 @@
                     };
             }()),
                 
-            stopMoving = function () {
-                engine.nextShape.setX(5);
-                engine.addObject(engine.nextShape);
+            removeLine = function (row) {
+                var i, shapeY, matrix;
+
+                for (i = 0; i < engine.objects.length; i += 1) {
+                    shapeY = engine.objects[i].getY();
+                    matrix = engine.objects[i].matrix;
+                    if ((shapeY <= row) && ((shapeY + matrix.length - 1) >= row)) {
+                        console.log('> ' + engine.objects[i].matrix);
+                        field.removeShape(engine.objects[i]);
+                        matrix = matrix.splice(row - shapeY, 1);
+                        engine.objects[i].setY(shapeY + 1);
+                        field.addShape(engine.objects[i]);
+                    }
+                }
+            },
                 
-                engine.nextShape = getRandomShape();
-                render.drawNextShape();
+            checkForLine = function () {
+                var row;
+                    
+                for (row = field.matrix.length - 2; row > 1; row -= 1) {
+                    if (field.matrix[row] === 16380) {
+                        removeLine(row);
+                        break;  // we have a line
+                    }
+                }
             },
                 
             getRandomShape = function () {
@@ -431,6 +450,14 @@
                 }
         
                 return shp;
+            },
+                
+            stopMoving = function () {
+                engine.nextShape.setX(5);
+                engine.addObject(engine.nextShape);
+                engine.nextShape = getRandomShape();
+                render.drawNextShape();
+                checkForLine();
             },
                 
             rotate = function () {
